@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--名称空间-->
+<mapper namespace="org.example.dao.AccountDao">
+    <select id="findAll" resultType="org.example.domain.Account">
+        select * from mybatis;
+    </select>
+    
+    <select id="selectByPrimaryKey" resultType="org.example.domain.Account">
+        select * from mybatis where id = #{id};
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from mybatis where id = #{id};
+    </delete>
+    <insert id="insert">
+        insert into mybatis (id,name,money,createTime,updateTime)
+        values (#{id},#{name},#{money},#{createTime},#{updateTime});
+    </insert>
+    <update id="updateByPrimaryKey">
+        update mybatis
+        set
+            id = #{id},
+            name = #{name},
+            money = #{money},
+            createTime = #{createTime},
+            updateTime = #{updateTime}
+        where id = #{id};
+    </update>
+</mapper>
