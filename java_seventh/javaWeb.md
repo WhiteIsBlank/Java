@@ -49,7 +49,7 @@
 
 ![](https://github.com/WhiteIsBlank/Picture/assets/116374553/66d05929-c074-43ea-b59f-60b58b8f7b70)
 
-[]: https://cloud.tencent.com/developer/chapter/13553	"常见状态码"
+参考链接：[常见状态码](https://cloud.tencent.com/developer/chapter/13553)
 
 ## Web服务器
 
@@ -218,4 +218,56 @@ Servlet是Java提供的一门动态Web资源开发技术
         System.out.println(line);
     }
 ```
+
+**post和get请求的请求数据位于不同的位置，所以利用request提供的一个方法来统一获取的方法**
+
+```java
+System.out.println("post/get...");
+        Map<String,String[]> map = req.getParameterMap();
+        for(String key : map.keySet()) {
+            System.out.println(key + ":");
+            //获取值
+            //String[] values = map.get(key);
+            String[] values = req.getParameterValues(key);
+            for(String value:values){
+                System.out.print(value+" ");
+            }
+            System.out.println();
+        }
+```
+
+这个在doget和dopost方法中均可使用来获取请求数据，意味着可以直接让dopost或者doget直接调用另一个函数从而减少重复代码的使用
+
+##### Servlet快速创建
+
+参考链接：[解决IDEA2023新版本无法创建Servlet的问题](https://blog.csdn.net/qq_65142821/article/details/135253765?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-135253765-blog-134417537.235^v43^pc_blog_bottom_relevance_base3&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
+
+##### 解决post和get获取请求参数乱码
+
+**Post解决中文乱码**
+
+```java
+//解决乱码问题,设置输入流的编码，在输出前使用
+req.setCharacterEncoding("UTF-8");
+```
+
+**Get解决中文乱码**
+
+Tomcat8已经解决这个问题
+
+![](https://github.com/WhiteIsBlank/Picture/assets/116374553/477d4386-0fe8-4872-839e-533a83edd1f6)
+
+##### 请求转发
+
+![](https://github.com/WhiteIsBlank/Picture/assets/116374553/41fe8d53-129c-4831-b7db-decfade7b80b)
+
+```java
+request.getRequestDispatcher("/req6").forward(request,response);
+```
+
+##### 共享数据资源
+
+![](https://github.com/WhiteIsBlank/Picture/assets/116374553/fbdf3c50-9582-4a83-b183-db61edb6341c)
+
+
 
